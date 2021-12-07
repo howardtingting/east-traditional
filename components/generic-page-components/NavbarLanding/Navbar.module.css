@@ -1,0 +1,15 @@
+.navlink {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.navbutton {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 15px;
+}

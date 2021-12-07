@@ -2,8 +2,16 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  background-image: url("../public/img_assets/floral_background\ 1.png");
+  background-size: 2731px 4096px;
+  background-position: center;
+  height:400vh;
+  overflow-x: hidden;
 }
 
 a {
