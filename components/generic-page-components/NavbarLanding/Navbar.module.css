@@ -6,10 +6,102 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 15px;
+    height:3rem;
 }
 
 .navbutton {
     white-space: nowrap;
     overflow: hidden;
     font-size: 15px;
+    height: 3rem;
+}
+
+.navcontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height:10rem;
+    justify-content: right;
+    position: fixed;
+    right: 10%;
+}
+
+.navlogo {
+    width: 160px;
+    height: 160px;
+    position:fixed;
+}
+
+.navlogoblack {
+    left: 1px;
+}
+
+.navburger {
+    display: none;
+}
+
+.navMobileContainer {
+    background-color:transparent;
+}
+
+@media only screen and (max-width: 1080px) {
+    .navMobileContainer {
+        display: block;
+        position: fixed;
+        right:-290px;
+        height:100vh;
+        width: 290px;
+        background-color: rgba(0,0,0,0.5);
+        transition: 0.5s;
+    }
+
+    .navcontainer {
+        width: 100%;
+        position: relative;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: right;
+        right: 0;
+        padding-right: 56px;
+        top:80px;
+    }
+    .navbutton {
+        background-color: transparent;
+    }
+
+    .navburger {
+        cursor: pointer;
+        display: block;
+        position: fixed;
+        right:22px;
+        top:20px;
+        width: 56px;
+        height:56px;
+        background-color: rgba(0,0,0,0.2);
+        transition: background-color 0.3s;
+    }
+
+    .navburger:hover, .navbutton:hover {
+        background-color: rgba(0,0,0,0.6)
+    }
+
+    .showNavContainer {
+        animation: slideInRight 0.3s;
+        animation-fill-mode: forwards;
+    }
+
+    .hideNavContainer {
+        animation: slideInLeft 0.3s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes slideInRight {
+        from {right:-290px}
+        to {right:0px}
+    }
+
+    @keyframes slideInLeft {
+        from {right:0px}
+        to {right:-290px}
+    }
 }

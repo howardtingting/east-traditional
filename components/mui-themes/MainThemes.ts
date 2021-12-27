@@ -36,8 +36,8 @@ const theme = createTheme({
         contrastText: '#fff',
       },
       whitelink: {
-          main: '#fff',
-          contrastText: 'rgb(255,255,255,0)',
+        main: '#fff',
+        contrastText: 'rgb(255,255,255,0)',
       },
     },
   });
