@@ -1,6 +1,5 @@
 import Burger from '../../atomic-components/Burger/Burger';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
@@ -36,18 +35,19 @@ const NavContainer = (props: any) => {
   ];
   const [showMobileNav, setShowMobileNav] = useState(false);
   const size: Size = useWindowSize();
-  return (
+  return (typeof window !== "undefined") ? (
     <Box sx={{height:'160px'}}>
-      <Box className={`${((showMobileNav && (size.width || 0) <= 1080)) ? styles.showNavContainer : styles.hideNavContainer} ${styles.navMobileContainer}`}>
+      <Box className={`${((showMobileNav && (size.width || window.innerWidth) <= 1080)) ? styles.showNavContainer : styles.hideNavContainer} ${styles.navMobileContainer}`}>
         <Stack className={styles.navcontainer} spacing={3} direction="row">
-          {((size.width || 0) <= 1080) ? [...NavListMobileItems] : [...NavListExpandedItems]}
+          {((size.width || window.innerWidth) <= 1080) ? [...NavListMobileItems] : [...NavListExpandedItems]}
         </Stack>
       </Box>
-      {<Box className={styles.navburger} onClick={() => {setShowMobileNav(!showMobileNav)}}><Burger/></Box>}
+      <Box className={styles.navburger} onClick={() => {setShowMobileNav(!showMobileNav)}}><Burger/>
+      </Box>
       {LogoBlack}
       {LogoWhite}
     </Box>
-  );
+  ) : (<Box sx={{height:'160px'}}></Box>)
 }
 
 function NavbarLanding() {
