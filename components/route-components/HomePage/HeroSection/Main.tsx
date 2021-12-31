@@ -46,7 +46,7 @@ const HeroSection = (props: any) => {
     fontSize:"0.8rem"
   }
   const HeroActionCallSx = Object.assign({
-    whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px",
+    whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px"
   },
     (size.width || ((typeof window !== "undefined") ? window.innerWidth : 0)) > 867 ? HeroActionCallExpandedSx : HeroActionCallMobileSx
   );
