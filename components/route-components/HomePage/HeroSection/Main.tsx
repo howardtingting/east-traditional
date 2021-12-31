@@ -40,17 +40,19 @@ const HeroSection = (props: any) => {
 
   //HERO ACTION CALL
   const HeroActionCallExpandedSx = {
-    fontSize:"1rem"
+    fontSize:"1.5rem"
   }
   const HeroActionCallMobileSx = {
     fontSize:"0.8rem"
   }
-  const HeroActionCallSx = Object.assign({},
+  const HeroActionCallSx = Object.assign({
+    whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px",
+  },
     (size.width || ((typeof window !== "undefined") ? window.innerWidth : 0)) > 867 ? HeroActionCallExpandedSx : HeroActionCallMobileSx
   );
   const HeroActionCall = (
-    <Box className={HeroActionCallSx} sx={{border:'1px solid green', backgroundColor:"#E2E2E2", margin:"20px clamp(10%, 20px, 20px)"}}>
-      <Typography sx={{whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"20px"}}>
+    <Box sx={{backgroundColor:"#E2E2E2", margin:"30px clamp(15%, 20%, 30%)"}}>
+      <Typography sx={HeroActionCallSx}>
         <span style={{whiteSpace: "nowrap"}}><Link href="bookonline" className={styles.link}>Book Online</Link>,</span>&nbsp;
         <span style={{whiteSpace: "nowrap"}}>call 408-372-5492, or</span>&nbsp;
         <span style={{whiteSpace: "nowrap"}}>email <Link href="/" className={styles.link}>jenlee@east-medicine.com</Link></span>&nbsp;
