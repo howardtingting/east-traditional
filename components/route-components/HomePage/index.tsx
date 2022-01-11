@@ -10,8 +10,8 @@ function HomePage() {
       <div>
         <NavbarLanding />
         <HeroSection />
-        <AboutSection />
-        <ListSection />
+        {/* <AboutSection />
+        <ListSection /> */}
         <Booking />
         <Footer />
       </div>

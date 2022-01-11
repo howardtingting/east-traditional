@@ -17,7 +17,7 @@ const HeroSection = (props: any) => {
   const HeroTextMobileSx = {
     fontSize: '2rem'
   }
-  const HeroTextSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 0)) > 867 ? HeroTextExpandedSx : HeroTextMobileSx)
+  const HeroTextSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroTextExpandedSx : HeroTextMobileSx)
   const HeroText = (
     <Typography sx={HeroTextSx} noWrap={true} align={"center"}>
       East Traditional Medicine
@@ -31,7 +31,7 @@ const HeroSection = (props: any) => {
   const HeroDescriptionMobileSx = {
     fontSize: '0.8rem'
   }
-  const HeroDescriptionSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 0)) > 867 ? HeroDescriptionExpandedSx : HeroDescriptionMobileSx)
+  const HeroDescriptionSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroDescriptionExpandedSx : HeroDescriptionMobileSx)
   const HeroDescription = (
     <Typography sx={HeroDescriptionSx} noWrap={true} align={"center"}>
       Traditional Chinese Medicine, Acupuncture &#38; Auricular Medicine
@@ -45,7 +45,7 @@ const HeroSection = (props: any) => {
   const HeroActionCallMobileSx = {
     fontSize:"0.8rem"
   }
-  const HeroActionCallSx = Object.assign({
+  const HeroActionCallSx: any = Object.assign({
     whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px"
   },
     (size.width || ((typeof window !== "undefined") ? window.innerWidth : 0)) > 867 ? HeroActionCallExpandedSx : HeroActionCallMobileSx
@@ -61,7 +61,7 @@ const HeroSection = (props: any) => {
     </Box>
   );
   return (
-    <Box sx={{paddingTop: '5vh', width:'100%'}}>
+    <Box sx={{padding: '5em 0', width:'100%'}}>
       {HeroText}
       {HeroDescription}
       {HeroActionCall}

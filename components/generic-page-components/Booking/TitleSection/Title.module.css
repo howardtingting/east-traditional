@@ -1,0 +1,16 @@
+.TitleText {
+    font-size:3em;
+    font-weight: lighter;
+}
+
+.TitleUnderline {
+    width:18em;
+    height: 1px;
+    background-color: #C4C4C4;
+}
+
+@media screen and (max-width: 867px) {
+    .TitleText {
+        font-size:2em;
+    }
+}
