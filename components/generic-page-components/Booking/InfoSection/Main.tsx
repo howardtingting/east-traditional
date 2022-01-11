@@ -11,17 +11,17 @@ import { Typography } from "@mui/material";
 
 
 const IconWithText = (args: any) => {
-    const IconComponent = args.icon || DisabledByDefaultIcon;
+    const IconComponent = args.icon || '';
     const text: string[] = args.text ? args.text : ['default text'];
     const sx: any = args.sx || {};
-    const WrappedIcon = (
+    const WrappedIcon = IconComponent ? (
         <Box sx={{margin:"0 1em 0 0"}}>
             <IconComponent/>
         </Box>
-    );
+    ) : '';
     const WrappedText = (
         <Box sx={{display:"flex", flexDirection:"column", ...sx}}>
-            {text.map((line) => <Typography>{line}</Typography>)}
+            {text.map((line, idx) => <Typography key={idx}>{line}</Typography>)}
         </Box>
     )
     return (
@@ -46,7 +46,7 @@ const ContactSection = (args: any) => {
 
 const InsuranceSection = (args: any) => {
     const InsuranceTitle = (
-        <Typography variant={"h5"} sx={{width:"max-content"}}>Insurance Accepted (PPO Only)</Typography>
+        <Typography variant={"h5"} noWrap={true}>Insurance Accepted (PPO Only)</Typography>
     );
     const BlueShield = <IconWithText icon={ArrowRightIcon} text={["Blue Shield (select plans)"]}/>
     const UnitedHealthcare = <IconWithText icon={ArrowRightIcon} text={["United Healthcare"]}/>
@@ -65,13 +65,30 @@ const InsuranceSection = (args: any) => {
     )
 }
 
+const HoursSection = (args: any) => {
+    const HoursTitle = (
+        <Typography variant={"h5"} sx={{width:"max-content", paddingBottom:"1em"}}>Hours</Typography>
+    );
+    const HoursContent = (
+        <IconWithText text={["Monday - Friday: 830am - 7pm", "By appointment only"]}></IconWithText>
+    );
+    return (
+        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 0 2em 1em", border:"1px solid #D3D3D3"}}>
+            {HoursTitle}
+            {HoursContent}
+        </Box>
+    );
+}
+
 const InfoSection = (args: any) => {
     const ContactInfo = <ContactSection/>;
     const InsuranceInfo = <InsuranceSection/>;
+    const HoursInfo = <HoursSection/>;
     return (
-        <Box sx={{minWidth: "380px", maxWidth:"510px"}}>
+        <Box sx={{minWidth: "340px", maxWidth:"510px"}}>
             {ContactInfo}
             {InsuranceInfo}
+            {HoursInfo}
         </Box>
     )
 }
