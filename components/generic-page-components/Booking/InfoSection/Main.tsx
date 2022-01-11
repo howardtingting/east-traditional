@@ -99,7 +99,7 @@ const InfoSection = (args: {}) => {
     const HoursInfo = <HoursSection/>;
     const PriceInfo = <PriceSection/>;
     return (
-        <Box sx={{width:"100%", display:"flex", justifyContent:"right"}}>
+        <Box sx={{display:"flex", justifyContent:"right"}}>
             <Box sx={{minWidth: "300px", maxWidth:"530px"}}>
                 {ContactInfo}
                 {InsuranceInfo}
