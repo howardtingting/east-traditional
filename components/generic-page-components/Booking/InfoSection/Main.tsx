@@ -51,7 +51,7 @@ const InsuranceSection = (args: any) => {
     const Aetna = <IconWithText icon={ArrowRightIcon} text={["Aetna"]}/>;
     const Cigna = <IconWithText icon={ArrowRightIcon} text={["Cigna"]}/>;
     return (
-        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 0 2em 1em", border:"1px solid #D3D3D3"}}>
+        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 1em 2em 1em", border:"1px solid #D3D3D3"}}>
             {InsuranceTitle}
             <Box sx={{paddingTop:"1em", display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))"}}>
                 {BlueShield}
@@ -67,7 +67,7 @@ const HoursSection = (args: {}) => {
     const HoursTitle = <Typography variant={"h5"} sx={{width:"max-content", paddingBottom:"1em"}}>Hours</Typography>;
     const HoursContent = <IconWithText text={["Monday - Friday: 830am - 7pm", "By appointment only"]}></IconWithText>;
     return (
-        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 0 2em 1em", border:"1px solid #D3D3D3"}}>
+        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 1em 2em 1em", border:"1px solid #D3D3D3"}}>
             {HoursTitle}
             {HoursContent}
         </Box>
@@ -85,7 +85,7 @@ const PriceSection = (args: {}) => {
         <IconWithText icon={ArrowRightIcon} text={[FollowupText]}></IconWithText>
     );
     return (
-        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 0 2em 1em", border:"1px solid #D3D3D3"}}>
+        <Box sx={{backgroundColor:"#F3F3F3", padding:"2em 1em 2em 1em", border:"1px solid #D3D3D3"}}>
             {PriceTitle}
             {InitialLine}
             {FollowupLine}
@@ -99,7 +99,7 @@ const InfoSection = (args: {}) => {
     const HoursInfo = <HoursSection/>;
     const PriceInfo = <PriceSection/>;
     return (
-        <Box sx={{minWidth: "300px", maxWidth:"510px"}}>
+        <Box sx={{minWidth: "300px", maxWidth:"530px"}}>
             {ContactInfo}
             {InsuranceInfo}
             {HoursInfo}
