@@ -7,9 +7,10 @@ function Booking() {
   return (
     <Box sx={{width:"100%", height:"100%", backgroundColor:"#EAF3FA", padding:"4em 0"}}>
       <TitleSection/>
-      <Box sx={{paddingTop:"3em", display:"flex"}}>
-        <InfoSection/>
+      <Box sx={{padding:"3em 1em 0 1em", display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(300px, 1fr))", gridGap:"1em"}}>
+        
         <FormSection/>
+        <InfoSection/>
       </Box>
     </Box>
   )
