@@ -25,27 +25,13 @@ const Form = (props: any) => {
         companyName: "",
         symptoms: "",
     });
-    const [fullName, setFullName] = useState("");
     const [formIdx, setFormIdx] = useState(1);
     const [completedSteps, setCompletedSteps] = useState({0: false, 1:false, 2:true, 3:false, 4:false});
     const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 
     };
-    const handleFormChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        console.log(e.target.value);
+    const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     };
-    const _handleFormChange: (fieldName: string) => ChangeEventHandler<HTMLInputElement> = (fieldName) => {
-        switch (fieldName) {
-            case "fullName":
-                return (e) => {
-                };
-            default:
-                return(e) => {
-                    console.log(e);
-                }
-            break;
-        }
-    }
     const handleStepChange: (idx: number) => any = (idx) => {
         const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
             setFormIdx(idx);
@@ -67,29 +53,43 @@ const Form = (props: any) => {
             </label>
         );
     }
-
     interface InputWithLabelProps {
         title?: string;
         onChange?: ChangeEventHandler<HTMLInputElement>;
         onKeyDown?: KeyboardEvent;
+        inputFor: keyof typeof formInputs;
         inputStyle?: {height?: string, width?: string};
     }
     const InputWithLabel = (props: InputWithLabelProps) => {
         const title: string = props.title || "";
         const inputStyle = props.inputStyle || {height:"2em"};
+        const inputFor = props.inputFor || "";
+        const [inputValue, setInputValue] = useState(formInputs[inputFor]);
         const onChange: ChangeEventHandler<HTMLInputElement> = props.onChange || ((e) => { console.log(e); });
+        const _onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+            onChange(e);
+            const value = e.target.value;
+            setInputValue(value);
+            formInputs[inputFor] = inputValue;
+        }
         return (
             <label style={{display:"flex", flexDirection:"column"}}>
                 {title}
                 <div style={{height:"0.3em"}}></div>
-                <input type="text" onChange={onChange} style={inputStyle}></input>
+                <input type="text" onChange={_onChange} style={inputStyle} value={inputValue}></input>
             </label>
         );
     }
-
+    // fullName: "",
+    // email: "",
+    // phone: "",
+    // dateOfBirth: "",
+    // subscriberId: "",
+    // companyName: "",
+    // symptoms: "",
     const FormComponent = (
         <Box>
-            <Box sx={{display:"flex", justifyContent:"space-around", marginBottom:"60px"}}>
+            <Box sx={{display:"flex", justifyContent:"space-between", marginBottom:"60px"}}>
                 <StepLabel stepLabelCount={1} stepLabelText={"Personal"}/>
                 <StepLabel stepLabelCount={2} stepLabelText={"Insurance"}/>
                 <StepLabel stepLabelCount={3} stepLabelText={"Symptoms"}/>
@@ -97,21 +97,21 @@ const Form = (props: any) => {
             </Box>
             {(formIdx === 1) && (<Box>
                 <form onSubmit={handleSubmit} style={{display:"grid", gap:"0.8em", gridTemplateRows:"repeat(4, 1fr)"}}>
-                    <InputWithLabel title={"Full Name (required)"} onChange={handleFormChange}/>
-                    <InputWithLabel title={"Email (required)"} onChange={handleFormChange}/>
-                    <InputWithLabel title={"Phone (required)"} onChange={handleFormChange}/>
-                    <InputWithLabel title={"Date of Birth (required)"} onChange={handleFormChange}/>
+                    <InputWithLabel title={"Full Name (required)"} onChange={handleInputChange} inputFor={"fullName"}/>
+                    <InputWithLabel title={"Email (required)"} onChange={handleInputChange} inputFor={"email"}/>
+                    <InputWithLabel title={"Phone (required)"} onChange={handleInputChange} inputFor={"phone"} />
+                    <InputWithLabel title={"Date of Birth (required)"} onChange={handleInputChange} inputFor={"dateOfBirth"} />
                 </form>
             </Box>)}
             {(formIdx === 2) && (<Box>
                 <form onSubmit={handleSubmit} style={{display:"grid", gap:"0.8em", gridTemplateRows:"repeat(2, 1fr)"}}>
-                    <InputWithLabel title={"Insurance Subscriber ID (optional)"} onChange={handleFormChange} />
-                    <InputWithLabel title={"Insurance Company Name (optional)"} onChange={handleFormChange} />
+                    <InputWithLabel title={"Insurance Subscriber ID (optional)"} onChange={handleInputChange} inputFor={"subscriberId"} />
+                    <InputWithLabel title={"Insurance Company Name (optional)"} onChange={handleInputChange} inputFor={"companyName"} />
                 </form>
             </Box>)}
             {(formIdx === 3) && (<Box>
                 <form onSubmit={handleSubmit} style={{display:"grid", gap:"0.8em", gridTemplateRows:"repeat(1, 1fr)"}}>
-                    <InputWithLabel title={"Symptoms (optional)"} onChange={handleFormChange} inputStyle={{height:"10em"}}/>
+                    <InputWithLabel title={"Symptoms (optional)"} onChange={handleInputChange} inputStyle={{height:"10em"}} inputFor={"symptoms"}/>
                 </form>
             </Box>)}
             {(formIdx === 4) && (<Box>
@@ -127,6 +127,7 @@ const Form = (props: any) => {
                     if (formIdx < 4) {
                         setFormIdx(formIdx + 1);
                     }
+                    console.log(formInputs);
                 }}>Next</Button>
             </Box>
         </Box>
