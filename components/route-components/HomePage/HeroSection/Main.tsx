@@ -4,7 +4,6 @@ import Link from '@mui/material/Link';
 import {useWindowSize, Size} from '../../../util-components/WindowSize';
 import styles from './Hero.module.css';
 
-
 const HeroDefault = (<div>HeroPage/HeroSection/Main.tsx</div>);
 
 const HeroSection = (props: any) => {
@@ -48,7 +47,7 @@ const HeroSection = (props: any) => {
   const HeroActionCallSx: any = Object.assign({
     whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px"
   },
-    (size.width || ((typeof window !== "undefined") ? window.innerWidth : 0)) > 867 ? HeroActionCallExpandedSx : HeroActionCallMobileSx
+    (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroActionCallExpandedSx : HeroActionCallMobileSx
   );
   const HeroActionCall = (
     <Box sx={{backgroundColor:"#E2E2E2", margin:"30px clamp(15%, 20%, 30%)"}}>
