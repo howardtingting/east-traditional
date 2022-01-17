@@ -1,3 +1,4 @@
+import CheckIcon from '@mui/icons-material/Check';
 import style from "./Form.module.css";
 import { Box } from "@mui/system";
 import { FormEventHandler, ChangeEventHandler, useState } from "react";
@@ -21,56 +22,90 @@ const Form = (props: any) => {
         companyName: "",
         symptoms: "",
     });
+    const [fullName, setFullName] = useState("");
     const [formIdx, setFormIdx] = useState(1);
-    const [completedSteps, setCompletedSteps] = useState({1:false,2:false,3:false,4:false});
+    const [completedSteps, setCompletedSteps] = useState({1:false, 2:true, 3:false, 4:false});
     const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 
     };
     const handleFormChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         console.log(e.target.value);
     };
-    const handleRadioChange: (idx: number) => any = (idx) => {
+    const _handleFormChange: (fieldName: string) => ChangeEventHandler<HTMLInputElement> = (fieldName) => {
+        switch (fieldName) {
+            case "fullName":
+                return (e) => {
+                };
+            default:
+                return(e) => {
+                    console.log(e);
+                }
+            break;
+        }
+    }
+    const handleStepChange: (idx: number) => any = (idx) => {
         const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
             setFormIdx(idx);
         }
         return handleChange;
     };
-    const InputWithLabel = (props: {title: string, value: string, onChange: ChangeEventHandler<HTMLInputElement>}) => {
+
+    interface InputWithLabelProps {
+        title?: string;
+        onChange?: ChangeEventHandler<HTMLInputElement>;
+        onKeyDown?: KeyboardEvent;
+    }
+    const InputWithLabel = (props: InputWithLabelProps) => {
         const title: string = props.title || "";
-        const value: string = props.value || "";
-        const onChange: ChangeEventHandler<HTMLInputElement> = props.onChange || undefined;
+        const onChange: ChangeEventHandler<HTMLInputElement> = props.onChange || ((e) => { console.log(e); });
         return (
             <label style={{display:"flex", flexDirection:"column"}}>
                 {title}
-                <input type="text" value={value} onChange={onChange}>{}</input>
+                <input type="text" onChange={onChange}></input>
             </label>
         );
     }
+
+    interface StepLabelProps {
+        stepLabelCount?: number;
+        stepLabelText?: string;
+    }
+    const StepLabel = (props: StepLabelProps) => {
+        const stepLabelCount = props.stepLabelCount || 0;
+        const stepLabelText = props.stepLabelText || `Label ${stepLabelCount}`;
+        return (
+            <label style={{userSelect:"none", display:"flex", justifyContent:"center", alignItems:"center", width:"35px", height:"35px", borderRadius:"100%", backgroundColor: (formIdx === stepLabelCount ? (completedSteps[stepLabelCount] ? StepState.Completed : StepState.Focused) : (completedSteps[stepLabelCount] ? StepState.Completed : StepState.Skipped))}} onClick={handleStepChange(stepLabelCount)}>
+                <div style={{color:"white"}}>{completedSteps[stepLabelCount] ? <div style={{marginTop:"5px"}}><CheckIcon/></div> : stepLabelCount}</div>
+                <div style={{position:"absolute", marginTop:"70px"}}>{stepLabelText}</div>
+            </label>
+        );
+    }
+
     const FormComponent = (
         <Box>
             <Box sx={{display:"flex", justifyContent:"space-around", marginBottom:"60px"}}>
-                <label style={{userSelect:"none", display:"flex", justifyContent:"center", alignItems:"center", width:"35px", height:"35px", borderRadius:"100%", backgroundColor: (formIdx === 1 ? (completedSteps[1] ? StepState.Completed : StepState.Focused) : (completedSteps[1] ? StepState.Completed : StepState.Skipped))}} onClick={handleRadioChange(1)}><div>1</div><div style={{position:"absolute", marginTop:"70px"}}>Personal</div></label>
-                <label style={{userSelect:"none", display:"flex", justifyContent:"center", alignItems:"center", width:"35px", height:"35px", borderRadius:"100%", backgroundColor: (formIdx === 2 ? (completedSteps[2] ? StepState.Completed : StepState.Focused) : (completedSteps[2] ? StepState.Completed : StepState.Skipped))}} onClick={handleRadioChange(2)}><div>2</div><div style={{position:"absolute", marginTop:"70px"}}>Insurance</div></label>
-                <label style={{userSelect:"none", display:"flex", justifyContent:"center", alignItems:"center", width:"35px", height:"35px", borderRadius:"100%", backgroundColor: (formIdx === 3 ? (completedSteps[3] ? StepState.Completed : StepState.Focused) : (completedSteps[3] ? StepState.Completed : StepState.Skipped))}} onClick={handleRadioChange(3)}><div>3</div><div style={{position:"absolute", marginTop:"70px"}}>Symptoms</div></label>
-                <label style={{userSelect:"none", display:"flex", justifyContent:"center", alignItems:"center", width:"35px", height:"35px", borderRadius:"100%", backgroundColor: (formIdx === 4 ? (completedSteps[4] ? StepState.Completed : StepState.Focused) : (completedSteps[4] ? StepState.Completed : StepState.Skipped))}} onClick={handleRadioChange(4)}><div>4</div><div style={{position:"absolute", marginTop:"70px"}}>Submit</div></label>
+                <StepLabel stepLabelCount={1} stepLabelText={"Personal"}/>
+                <StepLabel stepLabelCount={2} stepLabelText={"Insurance"}/>
+                <StepLabel stepLabelCount={3} stepLabelText={"Symptoms"}/>
+                <StepLabel stepLabelCount={4} stepLabelText={"Submit"}/>
             </Box>
             {(formIdx === 1) && (<Box>
                 <form onSubmit={handleSubmit}>
-                    <InputWithLabel title={"Full Name (required)"} value={formInputs.fullName} onChange={handleFormChange} />
-                    <InputWithLabel title={"Email (required)"} value={formInputs.email} onChange={handleFormChange} />
-                    <InputWithLabel title={"Phone (required)"} value={formInputs.phone} onChange={handleFormChange} />
-                    <InputWithLabel title={"Date of Birth (required)"} value={formInputs.dateOfBirth} onChange={handleFormChange} />
+                    <InputWithLabel title={"Full Name (required)"} onChange={handleFormChange} />
+                    <InputWithLabel title={"Email (required)"} onChange={handleFormChange} />
+                    <InputWithLabel title={"Phone (required)"} onChange={handleFormChange} />
+                    <InputWithLabel title={"Date of Birth (required)"} onChange={handleFormChange} />
                 </form>
             </Box>)}
             {(formIdx === 2) && (<Box>
                 <form onSubmit={handleSubmit}>
-                    <InputWithLabel title={"Insurance Subscriber ID (optional)"} value={formInputs.subscriberId} onChange={handleFormChange} />
-                    <InputWithLabel title={"Insurance Company Name (optional)"} value={formInputs.companyName} onChange={handleFormChange} />
+                    <InputWithLabel title={"Insurance Subscriber ID (optional)"} onChange={handleFormChange} />
+                    <InputWithLabel title={"Insurance Company Name (optional)"} onChange={handleFormChange} />
                 </form>
             </Box>)}
             {(formIdx === 3) && (<Box>
                 <form onSubmit={handleSubmit}>
-                    <InputWithLabel title={"Symptoms (optional)"} value={formInputs.symptoms} onChange={handleFormChange} />
+                    <InputWithLabel title={"Symptoms (optional)"} onChange={handleFormChange} />
                 </form>
             </Box>)}
             {(formIdx === 4) && (<Box>

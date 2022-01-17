@@ -1,5 +1,4 @@
 .FormContainer {
     padding-top:1em;
-    max-width: 430px;
-    min-width: 375px;
+    width:clamp(350px, 100%, 430px);
 }
