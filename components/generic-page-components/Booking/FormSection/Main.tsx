@@ -26,8 +26,18 @@ const Form = (props: any) => {
         companyName: "",
         symptoms: "",
     });
-    const [completedSteps, setCompletedSteps] = useState({0: false, 1:false, 2:true, 3:false, 4:false});
+    const [completedSteps, setCompletedSteps] = useState({0: true, 1:false, 2:true, 3:false, 4:true});
     const [formIdx, setFormIdx] : [(keyof typeof completedSteps), any] = useState(1);
+
+    const checkAllCompletedSteps = () => {
+        let result = true;
+        Object.keys(completedSteps).forEach((key) => {
+            let parsedKey: keyof typeof completedSteps = parseInt(key) as keyof typeof completedSteps;
+            if (completedSteps[parsedKey] === false) result = false;
+        });
+        return result;
+    }
+
     const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 
     };
@@ -133,11 +143,16 @@ const Form = (props: any) => {
                         setFormIdx(formIdx - 1);
                     }
                 }}>Previous</Button>)}
-                <Button key={1} className={style.navbutton} variant="contained" color={'navgreen'} onClick={() => {
-                    if (formIdx < 4) {
-                        setFormIdx(formIdx + 1);
-                    }
-                }}>{formIdx === 4 ? "Submit" : "Next"}</Button>
+                {(formIdx === 4)
+                    ? (!checkAllCompletedSteps()
+                        ? (<Button key={1} className={style.navbutton} variant="contained" color={'navgreen'} style={{opacity:"50%", cursor:"not-allowed"}}>Submit</Button>)
+                        : (<Button key={1} className={style.navbutton} variant="contained" color={'navgreen'}>Submit</Button>))
+                    : (<Button key={1} className={style.navbutton} variant="contained" color={'navgreen'} onClick={() => {
+                        if (formIdx < 4) {
+                            setFormIdx(formIdx + 1);
+                        }
+                    }}>Next</Button>)
+                }
             </Box>
         </Box>
     );
