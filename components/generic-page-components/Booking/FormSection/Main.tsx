@@ -16,6 +16,7 @@ const Form = (props: any) => {
     // TODO (FUTURE): Improve modularity of step form;
         // 1. variable number of steps
         // 2. variable form fields/inputs
+    const [statusMessage, setStatusMessage] = useState("Please fill out all (required) fields to continue!");
     const [formInputs, setFormInputs] = useState({
         fullName: "",
         email: "",
@@ -25,8 +26,8 @@ const Form = (props: any) => {
         companyName: "",
         symptoms: "",
     });
-    const [formIdx, setFormIdx] = useState(1);
     const [completedSteps, setCompletedSteps] = useState({0: false, 1:false, 2:true, 3:false, 4:false});
+    const [formIdx, setFormIdx] : [(keyof typeof completedSteps), any] = useState(1);
     const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 
     };
@@ -54,19 +55,21 @@ const Form = (props: any) => {
         );
     }
     interface InputWithLabelProps {
+        inputFor: keyof typeof formInputs;
         title?: string;
         onChange?: ChangeEventHandler<HTMLInputElement>;
         onKeyDown?: KeyboardEvent;
-        inputFor: keyof typeof formInputs;
         inputStyle?: {height?: string, width?: string};
+        inputType?: "multi" | "single";
     }
     const InputWithLabel = (props: InputWithLabelProps) => {
         const title: string = props.title || "";
         const inputStyle = props.inputStyle || {height:"2em"};
         const inputFor = props.inputFor || "";
+        const inputType = props.inputType || "single";
         const [inputValue, setInputValue] = useState(formInputs[inputFor]);
         const onChange: ChangeEventHandler<HTMLInputElement> = props.onChange || ((e) => { console.log(e); });
-        const _onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        const _onChange = (e: any) => {
             onChange(e);
             const value = e.target.value;
             setInputValue(value);
@@ -76,7 +79,9 @@ const Form = (props: any) => {
             <label style={{display:"flex", flexDirection:"column"}}>
                 {title}
                 <div style={{height:"0.3em"}}></div>
-                <input type="text" onChange={_onChange} style={inputStyle} value={inputValue}></input>
+                {inputType === "single"
+                    ? (<input type="text" onChange={_onChange} style={inputStyle} value={inputValue}></input>)
+                    : (<textarea onChange={_onChange} value={inputValue} rows={5} style={inputStyle}/>)}
             </label>
         );
     }
@@ -89,7 +94,7 @@ const Form = (props: any) => {
     // symptoms: "",
     const FormComponent = (
         <Box>
-            <Box sx={{display:"flex", justifyContent:"space-between", marginBottom:"60px"}}>
+            <Box sx={{display:"flex", justifyContent:"space-around", marginBottom:"60px"}}>
                 <StepLabel stepLabelCount={1} stepLabelText={"Personal"}/>
                 <StepLabel stepLabelCount={2} stepLabelText={"Insurance"}/>
                 <StepLabel stepLabelCount={3} stepLabelText={"Symptoms"}/>
@@ -111,24 +116,28 @@ const Form = (props: any) => {
             </Box>)}
             {(formIdx === 3) && (<Box>
                 <form onSubmit={handleSubmit} style={{display:"grid", gap:"0.8em", gridTemplateRows:"repeat(1, 1fr)"}}>
-                    <InputWithLabel title={"Symptoms (optional)"} onChange={handleInputChange} inputStyle={{height:"10em"}} inputFor={"symptoms"}/>
+                    <InputWithLabel title={"Symptoms (optional)"} onChange={handleInputChange} inputFor={"symptoms"} inputType={"multi"} inputStyle={{height:"100px"}}/>
                 </form>
             </Box>)}
             {(formIdx === 4) && (<Box>
-
+                {statusMessage}
             </Box>)}
             <Box sx={{marginTop:"40px", display:"flex", justifyContent:"space-between"}}>
-                <Button key={0} className={style.navbutton} variant="contained" color={'navgreen'} onClick={() => {
+                {(formIdx !== 1) && (<Button key={0} className={style.navbutton} variant="contained" color={'navgreen'} onClick={() => {
                     if (formIdx > 1) {
                         setFormIdx(formIdx - 1);
                     }
-                }}>Previous</Button>
+                }}>Previous</Button>)}
+                {(formIdx === 1) && (<Button key={0} className={style.navbutton} variant="contained" color={'navgreen'} style={{opacity:"50%", cursor:"not-allowed"}} onClick={() => {
+                    if (formIdx > 1) {
+                        setFormIdx(formIdx - 1);
+                    }
+                }}>Previous</Button>)}
                 <Button key={1} className={style.navbutton} variant="contained" color={'navgreen'} onClick={() => {
                     if (formIdx < 4) {
                         setFormIdx(formIdx + 1);
                     }
-                    console.log(formInputs);
-                }}>Next</Button>
+                }}>{formIdx === 4 ? "Submit" : "Next"}</Button>
             </Box>
         </Box>
     );
