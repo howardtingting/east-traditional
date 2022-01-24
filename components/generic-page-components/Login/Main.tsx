@@ -1,6 +1,6 @@
 import theme from '../../mui-themes/MainThemes';
 import { ThemeProvider } from '@emotion/react';
-import {Box} from '@mui/system';
+import {Box, SxProps} from '@mui/system';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import {Link} from '@mui/material';
@@ -22,7 +22,7 @@ function LoginModal() {
   );
 
   const LoginOptions = (
-    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"space-between"}}>
+    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"space-between"} as SxProps}>
       <Box>
         <input type="radio" name="remember-me" id="remember-me" checked={remember} onClick={() => {setRemember(!remember)}}/>
         <label htmlFor="remember-me">Remember me</label>
@@ -32,7 +32,7 @@ function LoginModal() {
   );
 
   const CreateAccountOptions = (
-    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"left", marginTop:"0.5em"}}>
+    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"left", marginTop:"0.5em"} as SxProps}>
       <Box>Don't have an account? <Link href="createaccount">Join free today</Link></Box>
     </Box>
   );

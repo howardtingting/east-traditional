@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import {useWindowSize, Size} from '../../../util-components/WindowSize';
 import styles from './Hero.module.css';
+import { SxProps } from '@mui/material';
 
 const HeroDefault = (<div>HeroPage/HeroSection/Main.tsx</div>);
 
@@ -32,7 +33,7 @@ const HeroSection = (props: any) => {
     </Typography>
   );
 
-  const HeroActionCallSx = {
+  const HeroActionCallSx: SxProps = {
     whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px", fontSize:"clamp(0.8rem, 2vw, 2.6rem)"
   }
   const HeroActionCall = (
