@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import {Link} from '@mui/material';
 import {useState, ChangeEventHandler} from "react";
+import { validate } from 'react-email-validator';
 
 function CreateAccountModal() {
   const [formInputs, setFormInputs] = useState({email: "", password:""});
@@ -33,8 +34,11 @@ function CreateAccountModal() {
     // console.log(e.target.value);
   }
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit = () => {
     // TODO: validate email and password
+    if (validate(formInputs['email'])) {
+      console.log(`email:${formInputs['email']} is valid`)
+    }
     console.log(formInputs);
   }
 
@@ -74,7 +78,7 @@ function CreateAccountModal() {
   const FormComponent = (
       <Box>
           <Box>
-              <form onSubmit={handleSubmit} style={{display:"grid", gap:"0.8em", gridTemplateRows:"1fr 1fr 0.5em"}}>
+              <form style={{display:"grid", gap:"0.8em", gridTemplateRows:"1fr 1fr 0.5em"}}>
                   <InputWithLabel title={"Email (required)"} onChange={handleInputChange} inputFor={"email"} inputStyle={{height:"3.3em"}}/>
                   <InputWithLabel title={"Password (required)"} onChange={handleInputChange} inputFor={"password"} inputStyle={{height:"3.3em"}}/>
               </form>
@@ -82,6 +86,7 @@ function CreateAccountModal() {
           <Box sx={{marginTop:"20px", display:"flex", justifyContent:"space-between"}}>
               <Button key={0} variant="contained" color={'navgreen'} onClick={() => {
                   console.log(`Attempting login with email=${formInputs['email']} and password=${formInputs['password']}`);
+                  handleSubmit();
               }} sx={{width:"100%"}}>Login Now</Button>
           </Box>
       </Box>
