@@ -10,13 +10,7 @@ const HeroSection = (props: any) => {
   const size: Size = useWindowSize();
 
   //HERO TEXT
-  const HeroTextExpandedSx = {
-    fontSize: '4.5rem'
-  }
-  const HeroTextMobileSx = {
-    fontSize: '2rem'
-  }
-  const HeroTextSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroTextExpandedSx : HeroTextMobileSx)
+  const HeroTextSx = {color:"white", fontSize:"clamp(2rem, 5vw, 8rem)"}
   const HeroText = (
     <Typography sx={HeroTextSx} noWrap={true} align={"center"}>
       East Traditional Medicine
@@ -30,27 +24,19 @@ const HeroSection = (props: any) => {
   const HeroDescriptionMobileSx = {
     fontSize: '0.8rem'
   }
-  const HeroDescriptionSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroDescriptionExpandedSx : HeroDescriptionMobileSx)
+  // const HeroDescriptionSx = Object.assign({color:'white'}, (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroDescriptionExpandedSx : HeroDescriptionMobileSx)
+  const HeroDescriptionSx = {color:"white", fontSize:"clamp(0.8rem, 1.5vw, 2.6rem)"}
   const HeroDescription = (
     <Typography sx={HeroDescriptionSx} noWrap={true} align={"center"}>
       Traditional Chinese Medicine, Acupuncture &#38; Auricular Medicine
     </Typography>
   );
 
-  //HERO ACTION CALL
-  const HeroActionCallExpandedSx = {
-    fontSize:"1.5rem"
+  const HeroActionCallSx = {
+    whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px", fontSize:"clamp(0.8rem, 2vw, 2.6rem)"
   }
-  const HeroActionCallMobileSx = {
-    fontSize:"0.8rem"
-  }
-  const HeroActionCallSx: any = Object.assign({
-    whiteSpace:"normal", display: "flex", justifyContent:"center", flexWrap:"wrap", padding:"30px"
-  },
-    (size.width || ((typeof window !== "undefined") ? window.innerWidth : 868)) > 867 ? HeroActionCallExpandedSx : HeroActionCallMobileSx
-  );
   const HeroActionCall = (
-    <Box sx={{backgroundColor:"#E2E2E2", margin:"30px clamp(15%, 20%, 30%)"}}>
+    <Box sx={{backgroundColor:"#E2E2E2", display:"flex", width:"90vw", justifyContent:"center"}}>
       <Typography sx={HeroActionCallSx}>
         <span style={{whiteSpace: "nowrap"}}><Link href="bookonline" className={styles.link}>Book Online</Link>,</span>&nbsp;
         <span style={{whiteSpace: "nowrap"}}>call 408-372-5492, or</span>&nbsp;
@@ -60,10 +46,10 @@ const HeroSection = (props: any) => {
     </Box>
   );
   return (
-    <Box sx={{padding: '5em 0', width:'100%'}}>
+    <Box sx={{marginBottom:"7rem", width:'100%', display:"flex", justifyContent:"space-between", alignItems:"center", flexDirection:"column"}}>
       {HeroText}
       {HeroDescription}
-      {HeroActionCall}
+      <Box sx={{marginTop:"2rem"}}>{HeroActionCall}</Box>
     </Box>
   );
 };
