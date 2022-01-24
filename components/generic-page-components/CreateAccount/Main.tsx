@@ -6,34 +6,25 @@ import { Typography } from '@mui/material';
 import {Link} from '@mui/material';
 import {useState, ChangeEventHandler} from "react";
 
-function LoginModal() {
+function CreateAccountModal() {
   const [formInputs, setFormInputs] = useState({email: "", password:""});
   const [remember, setRemember] = useState<boolean>(false);
 
   const LoginTitle = (
     <Box sx={{marginBottom:"25px"}}>
       <Typography variant='h5'>
-        Welcome back
+        Welcome
       </Typography>
       <Typography variant='h3' fontWeight={"bold"}>
-        User Login
+        Create Account
       </Typography>
-    </Box>
-  );
-
-  const LoginOptions = (
-    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"space-between"}}>
-      <Box>
-        <input type="radio" name="remember-me" id="remember-me" checked={remember} onClick={() => {setRemember(!remember)}}/>
-        <label htmlFor="remember-me">Remember me</label>
-      </Box>
-      <Link href="#">Forgot password?</Link>
     </Box>
   );
 
   const CreateAccountOptions = (
-    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"left", marginTop:"0.5em"}}>
-      <Box>Don't have an account? <Link href="createaccount">Join free today</Link></Box>
+    <Box sx={{display:"flex", flexWrap:"false", justifyContent:"space-between", marginTop:"0.5em"}}>
+      <Box>Already have an account?</Box>
+      <Link href="login">Click here to Login</Link>
     </Box>
   );
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -88,7 +79,6 @@ function LoginModal() {
                   <InputWithLabel title={"Password (required)"} onChange={handleInputChange} inputFor={"password"} inputStyle={{height:"3.3em"}}/>
               </form>
           </Box>
-          {LoginOptions}
           <Box sx={{marginTop:"20px", display:"flex", justifyContent:"space-between"}}>
               <Button key={0} variant="contained" color={'navgreen'} onClick={() => {
                   console.log(`Attempting login with email=${formInputs['email']} and password=${formInputs['password']}`);
@@ -99,7 +89,7 @@ function LoginModal() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh"}}>
-        <Box sx={{backgroundColor:"white", padding:"2em", width:"clamp(375px, 50%, 500px)", borderRadius:"0.5em"}}>
+        <Box sx={{backgroundColor:"white", padding:"2em", width:"clamp(385px, 50%, 500px)", borderRadius:"0.5em"}}>
           {LoginTitle}
           {FormComponent}
           {CreateAccountOptions}
@@ -109,4 +99,4 @@ function LoginModal() {
   );
 }
   
-export default LoginModal
+export default CreateAccountModal

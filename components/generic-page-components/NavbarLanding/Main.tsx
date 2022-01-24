@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import theme from '../../mui-themes/MainThemes';
 import styles from './Navbar.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {useWindowSize, Size} from '../../util-components/WindowSize';
 import { ThemeProvider } from '@emotion/react';
 
@@ -22,7 +22,7 @@ const NavContainer = (props: any) => {
     (<Link key={0} className={styles.navlink} href="landing" underline={'hover'}>About</Link>),
     (<Link key={1} className={styles.navlink} href="landing" underline={'hover'}>Cases Treated</Link>),
     (<Link key={2} className={styles.navlink} href="landing" underline={'hover'}>Contact</Link>),
-    (<Button key={3} className={styles.navbutton} variant="contained" color={'navgreen'}>Login</Button>),
+    (<Button key={3} className={styles.navbutton} variant="contained" color={'navgreen'} href="login">Login</Button>),
     (<Button key={4} className={styles.navbutton} variant="contained" color={'navgreen'} href="bookonline">Book Appointment</Button>)
   ];
   
