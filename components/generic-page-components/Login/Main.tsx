@@ -45,10 +45,15 @@ function LoginModal() {
 
   const handleSubmit = () => {
     // TODO: validate email and password
-    if (validate(formInputs['email'])) {
-      console.log(`email:${formInputs['email']} is valid`)
+    if (!(validate(formInputs['email']))) {
+      //TODO: error handling for invalid email
+      return;
     }
-    console.log(formInputs);
+    /* if not valid password -> TODO: error handling for invalid password */
+    console.log(`email:${formInputs['email']} is valid`);
+    console.log(`email:${formInputs['password']} is valid`);
+    console.log(`Attempting login with email=${formInputs['email']} and password=${formInputs['password']}`);
+    //TODO: connect to MySQL and create logins session, load front page with login UI
   }
 
   interface InputWithLabelProps {
@@ -94,10 +99,7 @@ function LoginModal() {
           </Box>
           {LoginOptions}
           <Box sx={{marginTop:"20px", display:"flex", justifyContent:"space-between"}}>
-              <Button key={0} variant="contained" color={'navgreen'} onClick={() => {
-                  console.log(`Attempting login with email=${formInputs['email']} and password=${formInputs['password']}`);
-                  handleSubmit();
-              }} sx={{width:"100%"}}>Login Now</Button>
+              <Button key={0} variant="contained" color={'navgreen'} onClick={handleSubmit} sx={{width:"100%"}}>Login Now</Button>
           </Box>
       </Box>
   );
