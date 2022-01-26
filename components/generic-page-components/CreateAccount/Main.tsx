@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import {Link} from '@mui/material';
 import {useState, ChangeEventHandler} from "react";
-import { validate } from 'react-email-validator';
+import validator from 'react-email-validator';
 
 function CreateAccountModal() {
   const [formInputs, setFormInputs] = useState({email: "", password:""});
@@ -36,8 +36,8 @@ function CreateAccountModal() {
 
   const handleSubmit = () => {
     // TODO: validate email and password
-    if (validate(formInputs['email'])) {
-      console.log(`email:${formInputs['email']} is valid`)
+    if (validator.validate(formInputs['email'])) {
+      console.log(`email:${formInputs['email']} is valid`);
     }
     console.log(formInputs);
   }
